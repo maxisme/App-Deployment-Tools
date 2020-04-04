@@ -24,7 +24,7 @@ plist=$project_dir"buildOptions.plist"
 xcarchive=$project_dir"tmp.xcarchive"
 app="$project_dir$project_name.app"
 info_plist="$project_dir$project_name/Info.plist"
-dmg_project_output="/Users/maxmitch/Documents/work/${domain}/${project_name}.dmg"
+dmg_project_output="${project_dir}${project_name}.dmg"
 sparkle_path="https://${domain}/version"
 
 #countdown function
@@ -88,9 +88,10 @@ rm -rf "$app" "$xcarchive" "$plist" "${project_dir}DistributionSummary.plist" "$
 
 # #commit
 cd "$project_dir"
-git tag -a "v$actual_version" -m "Releasing version $actual_version"
-git push origin master
+git tag -a "$actual_version" -m "Releasing version $actual_version"
+git push
 
 #upload to website
 
-echo -e "------------\n\nREMEMBER TO NOW UPDATE version.php WITH THE NEW VERISON ($actual_version)\n\n------------"
+echo $dmg_project_output
+echo -e "------------\n\nREMEMBER TO NOW UPDATE SPARKLE VERISON ($actual_version)\n\n------------"
