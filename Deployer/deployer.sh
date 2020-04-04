@@ -24,9 +24,8 @@ plist=$project_dir"buildOptions.plist"
 xcarchive=$project_dir"tmp.xcarchive"
 app="$project_dir$project_name.app"
 info_plist="$project_dir$project_name/Info.plist"
-dmg_project_output="/Users/maxmitch/Documents/work/${domain}/public_html/${project_name}.dmg"
-scp_command="scp '"$dmg_project_output"' root@${domain}:/var/www/${domain}/public_html/"
-sparkle_path="https://${domain}/version.php"
+dmg_project_output="/Users/maxmitch/Documents/work/${domain}/${project_name}.dmg"
+sparkle_path="https://${domain}/version"
 
 #countdown function
 function countDown {
@@ -93,6 +92,5 @@ git tag -a "v$actual_version" -m "Releasing version $actual_version"
 git push origin master
 
 #upload to website
-eval $scp_command
 
 echo -e "------------\n\nREMEMBER TO NOW UPDATE version.php WITH THE NEW VERISON ($actual_version)\n\n------------"
