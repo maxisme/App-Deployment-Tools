@@ -11,19 +11,17 @@ if [ -d "$1" ]; then
 	exit
 fi
 
-mkdir "$1"
-cd "$1"
+mkdir "$1" && cd "$1"
 
 img="icon.png"
 img_b="logo.png"
 og="og_logo.png"
 ico="icon.ico"
 menu_ico="app_menu_icon.png"
-
 img_background="icon_bg.png"
 
 cp "../logo.psd" "logo.psd"
-convert logo.psd[2] $img_b
+convert logo.psd[2] -delete 0 $img_b
 convert logo.psd[1] -background transparent -gravity center -scale 1024x1024 -extent 1024x1024 $img # and add background chanel
 
 #############
@@ -34,8 +32,7 @@ convert logo.psd[1] -background transparent -gravity center -scale 1024x1024 -ex
 convert $img_b -background transparent -gravity center -scale 75x75 -extent 100x100 $menu_ico
 
 # make image have background for .dmg and add padding
-convert $img -background transparent -gravity center -scale 940x940 \
--extent 1024x1024 -channel a -evaluate add 1% +channel $img_background
+convert $img -background transparent -gravity center -scale 940x940 -extent 1024x1024 -channel a -evaluate add 1% +channel $img_background
 
 # create AppIcon.appiconset
 iconPath="Assets.xcassets/AppIcon.appiconset"
